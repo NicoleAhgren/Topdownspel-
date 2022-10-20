@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "uFvxUVsqePOFzQm7/Xu76uDlRVHSBAGTpMNkOyoZZWCPUcuv1LWB189IJigaNo4aqZWJBpnSGlSLdHXwU9z/8g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ahgren.nicole\\Documents\\Skola\\Topdownspel\\Topdownspel\\Topdownspel.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ahgren.nicole\\.nuget\\packages\\raylib-cs\\4.2.0.1\\raylib-cs.4.2.0.1.nupkg.sha512",
+    "C:\\Users\\ahgren.nicole\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
