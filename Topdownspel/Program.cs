@@ -1,51 +1,87 @@
 ﻿using Raylib_cs;
+using System.Numerics;
 
-Raylib.InitWindow(800, 600,"Najkel");
+Raylib.InitWindow(800, 600, "Najkel");
 Raylib.SetTargetFPS(60);
+
+// Vector2 Position = new Vector2(20f, 30.5f);
+// Vector2 movement = new Vector2(0.1f, 0.1f);
+
+// Position += movement;
+Color LjusGrön = new Color(53, 191, 104, 1);
 
 Texture2D Gubbe = Raylib.LoadTexture("Gubbe.png");
 Texture2D RosaFjäril = Raylib.LoadTexture("RosaFjaril.png");
 Texture2D BlåFjäril = Raylib.LoadTexture("BlaFjaril.png");
+Texture2D LilaFjäril = Raylib.LoadTexture("LilaFaril.png");
+Texture2D Geting = Raylib.LoadTexture("Geting.png");
 
-Rectangle bla = new Rectangle (50, 60, 50, 50);
-float speed = 5f;
-Rectangle rosa = new Rectangle (600, 450, RosaFjäril.width, RosaFjäril.height);
-Rectangle blabla = new Rectangle (100, 100, BlåFjäril.width, BlåFjäril.height);
+Rectangle bla = new Rectangle(50, 60, 50, 50);
+float speed = 5f; //Bestämmer hur snabbt gubben rör sig 
+Rectangle rosa = new Rectangle(600, 450, RosaFjäril.width, RosaFjäril.height);
+Rectangle blabla = new Rectangle(100, 100, BlåFjäril.width, BlåFjäril.height);
+Rectangle lila = new Rectangle (600, 400, LilaFjäril.width, LilaFjäril.height);
+Rectangle geting = new Rectangle (250, 250, Geting.width, Geting.height);
 
 string Level = "Start";
 
 while (Raylib.WindowShouldClose() == false)
 {
-if (Level == "Start")
-{
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+    if (Level == "Start")
     {
-        Level = "Spel";
-    
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER)) //När man trycker ENTER startar level 1
+        {
+            Level = "Spel";
+        }
     }
-}
 
-if (Level == "Spel" || Level == "Spel2")
-{  
-    if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+    else if (Level == "Spel")
     {
-        bla.y -= speed;
+        if (Raylib.CheckCollisionRecs(bla, rosa)) //När man åker in i fjärilen så startar nästa level
+        {
+            Level = "Spel2";
+        }
     }
-    if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+    else if (Level == "Spel2")
     {
-        bla.y += speed;
+        if (Raylib.CheckCollisionRecs(bla, blabla))
+        {
+            Level = "Spel3";
+        }
     }
-     if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
+    if (Level == "Spel" || Level == "Spel2" || Level == "Spel3")
     {
-        bla.x += speed;
+        if (Raylib.CheckCollisionRecs(bla, geting))
+        {
+            Level = "GameOver";
+        }
     }
-     if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+    //     else if (Level == "GameOver")
+    // {
+    //     if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)) //När man trycker SPACE startar spelet om
+    //     {
+    //         Level = "Start";
+    //     }
+    // }
+    if (Level == "Spel" || Level == "Spel2" || Level == "Spel3")
     {
-        bla.x -= speed;
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP)) //Bestämmer vilken knapp du ska trycka på för att röra gubben
+        {
+            bla.y -= speed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+        {
+            bla.y += speed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
+        {
+            bla.x += speed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+        {
+            bla.x -= speed;
+        }
     }
-}
-
-
 
     Raylib.BeginDrawing();
 
@@ -57,27 +93,35 @@ if (Level == "Spel" || Level == "Spel2")
     }
 
     if (Level == "Spel")
-    { 
-    Raylib.ClearBackground(Color.PURPLE);
-    Raylib.DrawTexture(Gubbe, (int)bla.x, (int)bla.y, Color.BLACK);
-    Raylib.DrawTexture(RosaFjäril, (int)rosa.x, (int)rosa.y, Color.PINK);
-    }
-    
-
-    if (Raylib.CheckCollisionRecs(bla, rosa)) //Något fel med den!!!! 
-    //När man går bort från platsen av rosa fjärilen så börjar spelet hacka och ge epelepsianfall
     {
-        Level = "Spel2";
-    { 
-        if (Level == "Spel2")
-        {
-    Raylib.ClearBackground(Color.PINK);
-    Raylib.DrawTexture(Gubbe, (int)bla.x, (int)bla.y, Color.BLACK);
-    Raylib.DrawTexture(BlåFjäril, (int)blabla.x, (int)blabla.y, Color.BLUE);
+        Raylib.ClearBackground(Color.PURPLE);
+        Raylib.DrawTexture(Gubbe, (int)bla.x, (int)bla.y, Color.BLACK);
+        Raylib.DrawTexture(RosaFjäril, (int)rosa.x, (int)rosa.y, Color.PINK);
+        Raylib.DrawTexture(Geting, (int)geting.x, (int)geting.y, Color.YELLOW);
+        
+    }
 
-        }
+    if (Level == "Spel2")
+    {
+        Raylib.ClearBackground(Color.PINK);
+        Raylib.DrawTexture(Gubbe, (int)bla.x, (int)bla.y, Color.BLACK);
+        Raylib.DrawTexture(BlåFjäril, (int)blabla.x, (int)blabla.y, Color.BLUE);
+
     }
+    else if (Level == "Spel3")
+    {
+        Raylib.ClearBackground(LjusGrön);
+        Raylib.DrawTexture(Gubbe, (int)bla.x, (int)bla.y, Color.BLACK);
+        Raylib.DrawTexture(LilaFjäril, (int)lila.x, (int)lila.y, Color.PURPLE);
     }
+    if (Level == "GameOver")
+    {
+        Raylib.ClearBackground(Color.BLACK);
+        Raylib.DrawText("Du dog! Getingen åt upp dig!", 175, 300, 30, Color.RED);    
+        // Raylib.DrawText("Du dog! Getingen åt upp dig!", 175, 250, 30, Color.RED);  
+        // Raylib.DrawText("Tryck på SPACE för att spela igen", 125, 285, 30, Color.RED);            
+    }
+
 
     Raylib.EndDrawing();
 
