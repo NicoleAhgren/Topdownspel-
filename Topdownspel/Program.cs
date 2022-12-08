@@ -18,7 +18,7 @@ Texture2D BlåFjäril = Raylib.LoadTexture("BlaFjaril.png");
 Texture2D LilaFjäril = Raylib.LoadTexture("LilaFaril.png");
 Texture2D GulFjäril = Raylib.LoadTexture("GulFjaril.png");
 Texture2D Geting = Raylib.LoadTexture("Geting.png");
-Texture2D Geting2 = Raylib.LoadTexture("Geting2.png");
+//Texture2D Geting2 = Raylib.LoadTexture("Geting2.png");
 Texture2D Bikupa = Raylib.LoadTexture("Bikupa2.png");
 
 Rectangle background = new Rectangle(0, 0, Bakgrund.width, Bakgrund.height);
@@ -27,15 +27,15 @@ float speed = 5f; //Bestämmer hur snabbt gubben rör sig
 Rectangle rosa = new Rectangle(800, 650, RosaFjäril.width, RosaFjäril.height);
 Rectangle blabla = new Rectangle(100, 100, BlåFjäril.width, BlåFjäril.height);
 Rectangle lila = new Rectangle(700, 350, LilaFjäril.width, LilaFjäril.height);
-Rectangle gul = new Rectangle(100, 400, GulFjäril.width, GulFjäril.height);
+Rectangle gul = new Rectangle(100, 300, GulFjäril.width, GulFjäril.height);
 Rectangle geting = new Rectangle(700, 500, Geting.width, Geting.height);
-Rectangle geting2 = new Rectangle(800, 650, Geting2.width, Geting2.height);
+//Rectangle geting2 = new Rectangle(800, 650, Geting2.width, Geting2.height);
 Rectangle bikupa = new Rectangle(100, 500, Bikupa.width, Bikupa.height); 
 
 Vector2 GetingFlyga = new Vector2(1, 0);
 float GetingFart = 2f;
-Vector2 GetingFlyga2 = new Vector2 (1, 0);
-float GetingFart2 = 2f;
+//Vector2 GetingFlyga2 = new Vector2 (1, 0);
+//float GetingFart2 = 2f;
 
 string Level = "Start";
 
@@ -135,22 +135,22 @@ while (Raylib.WindowShouldClose() == false)
 
         Vector2 GubbePosition = new Vector2(avatar.x, avatar.y); //skapar en vector för gubbens postion
         Vector2 GetingPosition = new Vector2(geting.x, geting.y);
-        Vector2 GetingPosition2 = new Vector2(geting2.x, geting2.y);
+        //Vector2 GetingPosition2 = new Vector2(geting2.x, geting2.y);
 
         Vector2 hej = GubbePosition - GetingPosition; //Gör så att getingen följer efter gubben
         Vector2 Getingbla = Vector2.Normalize(hej);
-        Vector2 Hej = GubbePosition - GetingPosition2;
-        Vector2 Getingbla2 = Vector2.Normalize(Hej);
+        //Vector2 Hej = GubbePosition - GetingPosition2;
+        //Vector2 Getingbla2 = Vector2.Normalize(Hej);
 
 
         GetingFlyga = Getingbla * GetingFart;
-        GetingFlyga2 = Getingbla * GetingFart2;
+        //GetingFlyga2 = Getingbla * GetingFart2;
 
         geting.x += GetingFlyga.X;
         geting.y += GetingFlyga.Y;
 
-        geting2.x += GetingFlyga2.X;
-        geting2.y += GetingFlyga2.Y;
+        //geting2.x += GetingFlyga2.X;
+        //geting2.y += GetingFlyga2.Y;
     }
 
     Raylib.BeginDrawing();
