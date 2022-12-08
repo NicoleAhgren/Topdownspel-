@@ -16,9 +16,10 @@ Texture2D Gubbe = Raylib.LoadTexture("Gubbe.png");
 Texture2D RosaFjäril = Raylib.LoadTexture("RosaFjaril.png");
 Texture2D BlåFjäril = Raylib.LoadTexture("BlaFjaril.png");
 Texture2D LilaFjäril = Raylib.LoadTexture("LilaFaril.png");
+Texture2D GulFjäril = Raylib.LoadTexture("GulFjaril.png");
 Texture2D Geting = Raylib.LoadTexture("Geting.png");
 Texture2D Geting2 = Raylib.LoadTexture("Geting2.png");
-//Texture2D Bikupa = Raylib.LoadTexture("Bikupa.png");
+Texture2D Bikupa = Raylib.LoadTexture("Bikupa2.png");
 
 Rectangle background = new Rectangle(0, 0, Bakgrund.width, Bakgrund.height);
 Rectangle avatar = new Rectangle(50, 600, 50, 50);
@@ -26,9 +27,10 @@ float speed = 5f; //Bestämmer hur snabbt gubben rör sig
 Rectangle rosa = new Rectangle(800, 650, RosaFjäril.width, RosaFjäril.height);
 Rectangle blabla = new Rectangle(100, 100, BlåFjäril.width, BlåFjäril.height);
 Rectangle lila = new Rectangle(700, 350, LilaFjäril.width, LilaFjäril.height);
+Rectangle gul = new Rectangle(100, 400, GulFjäril.width, GulFjäril.height);
 Rectangle geting = new Rectangle(700, 500, Geting.width, Geting.height);
 Rectangle geting2 = new Rectangle(800, 650, Geting2.width, Geting2.height);
-//Rectangle bikupa = new Rectangle(0, 0, Bikupa.width, Bikupa.height); 
+Rectangle bikupa = new Rectangle(100, 500, Bikupa.width, Bikupa.height); 
 
 Vector2 GetingFlyga = new Vector2(1, 0);
 float GetingFart = 2f;
@@ -72,6 +74,15 @@ while (Raylib.WindowShouldClose() == false)
             points ++;
         }
     }
+    else if (Level == "Spel4")
+    {
+        if(Raylib.CheckCollisionRecs(avatar, gul))
+        {
+            Level = "Spel5";
+            points++;
+        }
+    }
+
     if (Level == "Spel" || Level == "Spel2" || Level == "Spel3" || Level == "Spel4")
     {
         if (Raylib.CheckCollisionRecs(avatar, geting))
@@ -81,9 +92,9 @@ while (Raylib.WindowShouldClose() == false)
     }
     if (Level == "Spel4")
     {
-        if (Raylib.CheckCollisionRecs(avatar, geting2))
+        if (Raylib.CheckCollisionRecs(avatar, bikupa))
         {
-            Level = "GameOver"; // Spelet slutar när getingen åker in i dig
+            Level = "GameOver";
         }
     }
 
@@ -185,9 +196,11 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.ClearBackground(Color.WHITE);
         Raylib.DrawTexture(Bakgrund, (int)background.x, (int)background.y, Color.WHITE);
         Raylib.DrawTexture(Gubbe, (int)avatar.x, (int)avatar.y, Color.BLACK);
-        // LÄGG IN EN NY FJÄRIL
+        Raylib.DrawTexture(GulFjäril, (int)gul.x, (int)gul.y, Color.YELLOW);
         Raylib.DrawTexture(Geting, (int)geting.x, (int)geting.y, Color.WHITE);
-        Raylib.DrawTexture(Geting2, (int)geting2.x, (int)geting2.y, Color.WHITE);
+        Raylib.DrawTexture(Bikupa,(int)bikupa.x, (int)bikupa.y, Color.WHITE);
+        Raylib.DrawText(points.ToString(), 50, 50, 50, Color.BLACK);
+        //Raylib.DrawTexture(Geting2, (int)geting2.x, (int)geting2.y, Color.WHITE);
             
     }
 
