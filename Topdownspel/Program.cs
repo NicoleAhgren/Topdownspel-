@@ -4,12 +4,11 @@
 using Raylib_cs;
 using System.Numerics;
 
-
 Raylib.InitWindow(1000, 800, "Najkel");
 Raylib.SetTargetFPS(60);
 
 int points = 0; // Räknar poäng
-Color LjusGrön = new Color(53, 191, 104, 1);
+Color LjusGrön = new Color(53, 191, 104, 1); // min egna färg
 
 Texture2D Bakgrund = Raylib.LoadTexture("Bakgrund.png");
 Texture2D Gubbe = Raylib.LoadTexture("Gubbe.png");
