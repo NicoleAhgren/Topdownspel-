@@ -1,5 +1,5 @@
 ﻿// Ha kvar så att två getingar jagar gubben eller gör så att det finns hinder på banan istället
-// och har endast en geting. Hinder kan vara bikupor som man dör om man råkar nudda.
+// och ha endast en geting. Hinder kan vara bikupor som man dör om man råkar nudda.
 
 using Raylib_cs;
 using System.Numerics;
@@ -131,6 +131,8 @@ while (Raylib.WindowShouldClose() == false)
         {
             avatar.y -= playerMovement.Y;
         }
+
+        // [ Denna kod under är tagen från facit, koden om vector2 ]
 
         Vector2 GubbePosition = new Vector2(avatar.x, avatar.y); //skapar en vector för gubbens postion
         Vector2 GetingPosition = new Vector2(geting.x, geting.y);
