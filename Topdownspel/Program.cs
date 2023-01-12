@@ -7,7 +7,7 @@ using System.Numerics;
 Raylib.InitWindow(1000, 800, "Najkel");
 Raylib.SetTargetFPS(60);
 
-int points = 0; // Räknar poäng
+int points = 0; // Räknar poäng och gör så att poängen börjar på 0
 Color LjusGrön = new Color(53, 191, 104, 1); // min egna färg
 
 Texture2D Bakgrund = Raylib.LoadTexture("Bakgrund.png");
@@ -19,6 +19,7 @@ Texture2D GulFjäril = Raylib.LoadTexture("GulFjaril.png");
 Texture2D Geting = Raylib.LoadTexture("Geting.png");
 //Texture2D Geting2 = Raylib.LoadTexture("Geting2.png");
 Texture2D Bikupa = Raylib.LoadTexture("Bikupa2.png");
+Texture2D Bikupa2 = Raylib.LoadTexture("Bikupa2.png"); 
 
 Rectangle background = new Rectangle(0, 0, Bakgrund.width, Bakgrund.height);
 Rectangle avatar = new Rectangle(50, 600, 50, 50);
@@ -102,20 +103,20 @@ while (Raylib.WindowShouldClose() == false)
         Vector2 playerMovement = new Vector2();
     
 
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP)) //Bestämmer vilken knapp du ska trycka på för att röra gubben
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP)||Raylib.IsKeyDown(KeyboardKey.KEY_W)) //Bestämmer vilken knapp du ska trycka på för att röra gubben
         {
             playerMovement.Y = -speed;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN)||Raylib.IsKeyDown(KeyboardKey.KEY_S))
         {
             playerMovement.Y = +speed;
             // avatar.y += speed;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)||Raylib.IsKeyDown(KeyboardKey.KEY_D))
         {
             playerMovement.X = +speed;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)||Raylib.IsKeyDown(KeyboardKey.KEY_A))
         {
             playerMovement.X = -speed;
         }
@@ -201,8 +202,14 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.DrawTexture(Geting, (int)geting.x, (int)geting.y, Color.WHITE);
         Raylib.DrawTexture(Bikupa,(int)bikupa.x, (int)bikupa.y, Color.WHITE);
         Raylib.DrawText(points.ToString(), 50, 50, 50, Color.BLACK);
-        //Raylib.DrawTexture(Geting2, (int)geting2.x, (int)geting2.y, Color.WHITE);
-            
+        //Raylib.DrawTexture(Geting2, (int)geting2.x, (int)geting2.y, Color.WHITE);      
+    }
+    if (Level == "Spel5") // om man klarar denhär leveln så vinner man eller nåt
+    {
+        Raylib.ClearBackground(Color.WHITE);
+        Raylib.DrawTexture(Bakgrund, (int)background.x, (int)background.y, Color.WHITE);
+        Raylib.DrawTexture(Gubbe, (int)avatar.x, (int)avatar.y, Color.BLACK);
+        //Raylib.DrawTexture()
     }
 
 
