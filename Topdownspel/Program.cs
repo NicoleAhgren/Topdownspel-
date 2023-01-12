@@ -4,7 +4,7 @@
 using Raylib_cs;
 using System.Numerics;
 
-Raylib.InitWindow(1000, 800, "Najkel");
+Raylib.InitWindow(1000, 800, "Najkel"); // 1000 = bredden 800 = höjden
 Raylib.SetTargetFPS(60);
 
 int points = 0; // Räknar poäng och gör så att poängen börjar på 0
@@ -13,6 +13,7 @@ Color LjusGrön = new Color(53, 191, 104, 1); // min egna färg
 Texture2D Bakgrund = Raylib.LoadTexture("Bakgrund.png");
 Texture2D Gubbe = Raylib.LoadTexture("Gubbe.png");
 Texture2D RosaFjäril = Raylib.LoadTexture("RosaFjaril.png");
+Texture2D RosaFjäril2 = Raylib.LoadTexture("RosaFjaril.png");
 Texture2D BlåFjäril = Raylib.LoadTexture("BlaFjaril.png");
 Texture2D LilaFjäril = Raylib.LoadTexture("LilaFaril.png");
 Texture2D GulFjäril = Raylib.LoadTexture("GulFjaril.png");
@@ -25,12 +26,15 @@ Rectangle background = new Rectangle(0, 0, Bakgrund.width, Bakgrund.height);
 Rectangle avatar = new Rectangle(50, 600, 50, 50);
 float speed = 5f; //Bestämmer hur snabbt gubben rör sig 
 Rectangle rosa = new Rectangle(800, 650, RosaFjäril.width, RosaFjäril.height);
+Rectangle rosa2 = new Rectangle(200, 550, RosaFjäril.width, RosaFjäril.height);
 Rectangle blabla = new Rectangle(100, 100, BlåFjäril.width, BlåFjäril.height);
 Rectangle lila = new Rectangle(700, 350, LilaFjäril.width, LilaFjäril.height);
-Rectangle gul = new Rectangle(100, 300, GulFjäril.width, GulFjäril.height);
+Rectangle gul = new Rectangle(450, 300, GulFjäril.width, GulFjäril.height);
 Rectangle geting = new Rectangle(700, 500, Geting.width, Geting.height);
 //Rectangle geting2 = new Rectangle(800, 650, Geting2.width, Geting2.height);
 Rectangle bikupa = new Rectangle(100, 500, Bikupa.width, Bikupa.height); 
+Rectangle bikupa2 = new Rectangle(300, 450, Bikupa.width, Bikupa.height); 
+
 
 Vector2 GetingFlyga = new Vector2(1, 0);
 float GetingFart = 2f;
@@ -82,23 +86,42 @@ while (Raylib.WindowShouldClose() == false)
             points++;
         }
     }
+    if (Level == "GameOver")
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+        {
+            Level = "Start";
+        }
+    }
 
-    if (Level == "Spel" || Level == "Spel2" || Level == "Spel3" || Level == "Spel4")
+    if (Level == "Spel" || Level == "Spel2" || Level == "Spel3" || Level == "Spel4" || Level == "Spel5")
     {
         if (Raylib.CheckCollisionRecs(avatar, geting))
         {
             Level = "GameOver"; // Spelet slutar när getingen åker in i dig
         }
     }
-    if (Level == "Spel4")
+    if (Level == "Spel4" || Level == "Spel5")
     {
         if (Raylib.CheckCollisionRecs(avatar, bikupa))
         {
             Level = "GameOver";
         }
     }
+    if (Level == "Spel5")
+    {
+        if (Raylib.CheckCollisionRecs(avatar, bikupa2))
+        {
+            Level = "GameOver";
+        }
+        if (Raylib.CheckCollisionRecs(avatar, rosa2))
+        {
+            Level = "Winner";
+            points++;
+        }
+    }
 
-    if (Level == "Spel" || Level == "Spel2" || Level == "Spel3" || Level == "Spel4")
+    if (Level == "Spel" || Level == "Spel2" || Level == "Spel3" || Level == "Spel4" || Level == "Spel5")
     {
         Vector2 playerMovement = new Vector2();
     
@@ -160,7 +183,7 @@ while (Raylib.WindowShouldClose() == false)
     if (Level == "Start")
     {
         Raylib.ClearBackground(Color.PINK);
-        Raylib.DrawText("Tryck ENTER för att spela", 150, 300, 30, Color.BLACK);
+        Raylib.DrawText("Tryck ENTER för att spela", 275, 400, 30, Color.BLACK);
 
     }
 
@@ -209,7 +232,11 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.ClearBackground(Color.WHITE);
         Raylib.DrawTexture(Bakgrund, (int)background.x, (int)background.y, Color.WHITE);
         Raylib.DrawTexture(Gubbe, (int)avatar.x, (int)avatar.y, Color.BLACK);
-        //Raylib.DrawTexture()
+        Raylib.DrawTexture(RosaFjäril2, (int)rosa2.x, (int)rosa2.y, Color.PINK);
+        Raylib.DrawTexture(Geting, (int)geting.x, (int)geting.y, Color.WHITE);
+        Raylib.DrawTexture(Bikupa,(int)bikupa.x, (int)bikupa.y, Color.WHITE);
+        Raylib.DrawTexture(Bikupa2, (int)bikupa2.x, (int)bikupa2.y, Color.WHITE);
+        Raylib.DrawText(points.ToString(), 50, 50, 50, Color.BLACK);
     }
 
 
@@ -218,9 +245,17 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.ClearBackground(Color.BLACK);
         Raylib.DrawText("Du dog! Getingen åt upp dig!", 250, 300, 30, Color.RED);
         Raylib.DrawText("Du fick: " + points + " Poäng", 350, 350, 30, Color.RED);
+        Raylib.DrawText("Tryck ENTER för att spela igen", 250, 400, 30, Color.RED);
 
   
         // Raylib.DrawText("Tryck på SPACE för att spela igen", 125, 285, 30, Color.RED);            
+    }
+    if (Level == "Winner")
+    {
+        Raylib.ClearBackground(Color.PURPLE);
+        Raylib.DrawText("Grattis du vann!", 350, 350, 30, Color.BLACK);
+        Raylib.DrawText("Du fick: " + points + " Poäng", 350, 400, 30, Color.BLACK);
+
     }
 
     Raylib.EndDrawing();
