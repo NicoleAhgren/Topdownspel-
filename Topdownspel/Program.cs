@@ -1,5 +1,6 @@
 ﻿// Ha kvar så att två getingar jagar gubben eller gör så att det finns hinder på banan istället
 // och ha endast en geting. Hinder kan vara bikupor som man dör om man råkar nudda.
+// kan göra en lista på geting, gubbe och bakgrund?? !!!!!!!
 
 using Raylib_cs;
 using System.Numerics;
@@ -90,6 +91,7 @@ while (Raylib.WindowShouldClose() == false)
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
+            
             Level = "Start";
         }
     }
@@ -245,7 +247,7 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.ClearBackground(Color.BLACK);
         Raylib.DrawText("Du dog! Getingen åt upp dig!", 250, 300, 30, Color.RED);
         Raylib.DrawText("Du fick: " + points + " Poäng", 350, 350, 30, Color.RED);
-        Raylib.DrawText("Tryck ENTER för att spela igen", 250, 400, 30, Color.RED);
+        Raylib.DrawText("Tryck SPACE för att spela igen", 250, 400, 30, Color.RED);
 
   
         // Raylib.DrawText("Tryck på SPACE för att spela igen", 125, 285, 30, Color.RED);            
