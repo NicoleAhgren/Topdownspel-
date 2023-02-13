@@ -13,17 +13,9 @@ Color LjusGrön = new Color(53, 191, 104, 1); // min egna färg
 
 //List <Texture2D> Avatars = new List<Texture2D>();
 
-Texture2D Bakgrund = Raylib.LoadTexture("Bakgrund.png");
-Texture2D Gubbe = Raylib.LoadTexture("Gubbe.png");
-Texture2D RosaFjäril = Raylib.LoadTexture("RosaFjaril.png");
-Texture2D RosaFjäril2 = Raylib.LoadTexture("RosaFjaril.png");
-Texture2D BlåFjäril = Raylib.LoadTexture("BlaFjaril.png");
-Texture2D LilaFjäril = Raylib.LoadTexture("LilaFaril.png");
-Texture2D GulFjäril = Raylib.LoadTexture("GulFjaril.png");
-Texture2D Geting = Raylib.LoadTexture("Geting.png");
-//Texture2D Geting2 = Raylib.LoadTexture("Geting2.png");
-Texture2D Bikupa = Raylib.LoadTexture("Bikupa2.png");
-Texture2D Bikupa2 = Raylib.LoadTexture("Bikupa2.png"); 
+Texture2D Bakgrund, Gubbe, RosaFjäril, RosaFjäril2, BlåFjäril, LilaFjäril, GulFjäril, Geting, Bikupa, Bikupa2;
+
+NewMethod(out Bakgrund, out Gubbe, out RosaFjäril, out RosaFjäril2, out BlåFjäril, out LilaFjäril, out GulFjäril, out Geting, out Bikupa, out Bikupa2);
 
 //List <Rectangle> Avatars = new List<Rectangle>();
 
@@ -37,8 +29,8 @@ Rectangle lila = new Rectangle(700, 350, LilaFjäril.width, LilaFjäril.height);
 Rectangle gul = new Rectangle(450, 300, GulFjäril.width, GulFjäril.height);
 Rectangle geting = new Rectangle(700, 500, Geting.width, Geting.height);
 //Rectangle geting2 = new Rectangle(800, 650, Geting2.width, Geting2.height);
-Rectangle bikupa = new Rectangle(100, 500, Bikupa.width, Bikupa.height); 
-Rectangle bikupa2 = new Rectangle(300, 450, Bikupa.width, Bikupa.height); 
+Rectangle bikupa = new Rectangle(100, 500, Bikupa.width, Bikupa.height);
+Rectangle bikupa2 = new Rectangle(300, 450, Bikupa.width, Bikupa.height);
 
 
 Vector2 GetingFlyga = new Vector2(1, 0);
@@ -63,8 +55,8 @@ while (Raylib.WindowShouldClose() == false)
         if (Raylib.CheckCollisionRecs(avatar, rosa)) //När man åker in i fjärilen så startar nästa level
         {
             Level = "Spel2";
-            points ++; // Lägger till 1 poäng när man åker in i fjärilen
-            
+            points++; // Lägger till 1 poäng när man åker in i fjärilen
+
         }
     }
     else if (Level == "Spel2")
@@ -72,7 +64,7 @@ while (Raylib.WindowShouldClose() == false)
         if (Raylib.CheckCollisionRecs(avatar, blabla))
         {
             Level = "Spel3";
-            points ++;
+            points++;
         }
     }
     else if (Level == "Spel3")
@@ -80,12 +72,12 @@ while (Raylib.WindowShouldClose() == false)
         if (Raylib.CheckCollisionRecs(avatar, lila))
         {
             Level = "Spel4";
-            points ++;
+            points++;
         }
     }
     else if (Level == "Spel4")
     {
-        if(Raylib.CheckCollisionRecs(avatar, gul))
+        if (Raylib.CheckCollisionRecs(avatar, gul))
         {
             Level = "Spel5";
             points++;
@@ -95,7 +87,7 @@ while (Raylib.WindowShouldClose() == false)
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
-            
+
             Level = "Start";
         }
     }
@@ -130,22 +122,22 @@ while (Raylib.WindowShouldClose() == false)
     if (Level == "Spel" || Level == "Spel2" || Level == "Spel3" || Level == "Spel4" || Level == "Spel5")
     {
         Vector2 playerMovement = new Vector2();
-    
 
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP)||Raylib.IsKeyDown(KeyboardKey.KEY_W)) //Bestämmer vilken knapp du ska trycka på för att röra gubben
+
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP) || Raylib.IsKeyDown(KeyboardKey.KEY_W)) //Bestämmer vilken knapp du ska trycka på för att röra gubben
         {
             playerMovement.Y = -speed;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN)||Raylib.IsKeyDown(KeyboardKey.KEY_S))
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN) || Raylib.IsKeyDown(KeyboardKey.KEY_S))
         {
             playerMovement.Y = +speed;
             // avatar.y += speed;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)||Raylib.IsKeyDown(KeyboardKey.KEY_D))
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) || Raylib.IsKeyDown(KeyboardKey.KEY_D))
         {
             playerMovement.X = +speed;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)||Raylib.IsKeyDown(KeyboardKey.KEY_A))
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) || Raylib.IsKeyDown(KeyboardKey.KEY_A))
         {
             playerMovement.X = -speed;
         }
@@ -229,7 +221,7 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.DrawTexture(Gubbe, (int)avatar.x, (int)avatar.y, Color.BLACK);
         Raylib.DrawTexture(GulFjäril, (int)gul.x, (int)gul.y, Color.YELLOW);
         Raylib.DrawTexture(Geting, (int)geting.x, (int)geting.y, Color.WHITE);
-        Raylib.DrawTexture(Bikupa,(int)bikupa.x, (int)bikupa.y, Color.WHITE);
+        Raylib.DrawTexture(Bikupa, (int)bikupa.x, (int)bikupa.y, Color.WHITE);
         Raylib.DrawText(points.ToString(), 50, 50, 50, Color.BLACK);
         //Raylib.DrawTexture(Geting2, (int)geting2.x, (int)geting2.y, Color.WHITE);      
     }
@@ -240,7 +232,7 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.DrawTexture(Gubbe, (int)avatar.x, (int)avatar.y, Color.BLACK);
         Raylib.DrawTexture(RosaFjäril2, (int)rosa2.x, (int)rosa2.y, Color.PINK);
         Raylib.DrawTexture(Geting, (int)geting.x, (int)geting.y, Color.WHITE);
-        Raylib.DrawTexture(Bikupa,(int)bikupa.x, (int)bikupa.y, Color.WHITE);
+        Raylib.DrawTexture(Bikupa, (int)bikupa.x, (int)bikupa.y, Color.WHITE);
         Raylib.DrawTexture(Bikupa2, (int)bikupa2.x, (int)bikupa2.y, Color.WHITE);
         Raylib.DrawText(points.ToString(), 50, 50, 50, Color.BLACK);
     }
@@ -253,7 +245,7 @@ while (Raylib.WindowShouldClose() == false)
         Raylib.DrawText("Du fick: " + points + " Poäng", 350, 350, 30, Color.RED);
         Raylib.DrawText("Tryck SPACE för att spela igen", 250, 400, 30, Color.RED);
 
-  
+
         // Raylib.DrawText("Tryck på SPACE för att spela igen", 125, 285, 30, Color.RED);            
     }
     if (Level == "Winner")
@@ -266,6 +258,21 @@ while (Raylib.WindowShouldClose() == false)
 
     Raylib.EndDrawing();
 
+}
+
+static void NewMethod(out Texture2D Bakgrund, out Texture2D Gubbe, out Texture2D RosaFjäril, out Texture2D RosaFjäril2, out Texture2D BlåFjäril, out Texture2D LilaFjäril, out Texture2D GulFjäril, out Texture2D Geting, out Texture2D Bikupa, out Texture2D Bikupa2)
+{
+    Bakgrund = Raylib.LoadTexture("Bakgrund.png");
+    Gubbe = Raylib.LoadTexture("Gubbe.png");
+    RosaFjäril = Raylib.LoadTexture("RosaFjaril.png");
+    RosaFjäril2 = Raylib.LoadTexture("RosaFjaril.png");
+    BlåFjäril = Raylib.LoadTexture("BlaFjaril.png");
+    LilaFjäril = Raylib.LoadTexture("LilaFaril.png");
+    GulFjäril = Raylib.LoadTexture("GulFjaril.png");
+    Geting = Raylib.LoadTexture("Geting.png");
+    //Texture2D Geting2 = Raylib.LoadTexture("Geting2.png");
+    Bikupa = Raylib.LoadTexture("Bikupa2.png");
+    Bikupa2 = Raylib.LoadTexture("Bikupa2.png");
 }
 
 
